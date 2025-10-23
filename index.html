@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tourism Mini-Quiz 🎓</title>
+<style>
+:root { --ok:#0a7c2f; --bad:#b00020; --ink:#1b1b1b; --card:#ffffff; --muted:#6b7280; }
+body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#f6f7fb;color:var(--ink);margin:0;padding:2rem;}
+.wrap{max-width:860px;margin:auto;}
+h1{font-size:clamp(1.6rem,2.4vw,2rem);margin:.2rem 0 1rem}
+.sub{color:var(--muted);margin-bottom:1.5rem}
+.q{
+background:var(--card); border:1px solid #e6e6ef; border-radius:14px;
+padding:1rem 1.1rem; margin:0 0 1rem 0; box-shadow:0 1px 0 rgba(16,24,40,.02);
+}
+.topic{display:inline-block; font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
+background:#eef7ff; color:#0b5ad9; padding:.25rem .5rem; border-radius:6px; margin-bottom:.5rem}
+.q h3{margin:.4rem 0 .6rem; font-size:1.05rem}
+.opts{display:grid; gap:.45rem; margin:.4rem 0 .6rem}
+.opts label{display:flex; align-items:flex-start; gap:.55rem; cursor:pointer; padding:.45rem .55rem; border-radius:10px}
+.opts input{margin-top:.25rem}
+.opts label:hover{background:#fafafe}
+.bar{display:flex; gap:.6rem; align-items:center; flex-wrap:wrap}
+.btn{
+appearance:none; border:0; background:#0b5ad9; color:white; border-radius:10px; padding:.6rem .9rem;
+font-weight:600; cursor:pointer; transition:.15s transform ease;
+}
+.btn:active{transform:translateY(1px)}
+.msg{min-height:1.4em; font-weight:700}
+.msg.ok{color:var(--ok)}
+.msg.bad{color:var(--bad)}
+.score{font-weight:700; margin-top:.75rem}
+/* Big animated success text overlay */
+#hooray{
+position:fixed; inset:0; display:grid; place-items:center; pointer-events:none;
+opacity:0; font-size:clamp(2.5rem,8vw,6rem); font-weight:900;
+color:transparent; background:linear-gradient(90deg,#ff0077,#ff9800,#ffd400,#00c853,#00bcd4,#7c4dff);
+-webkit-background-clip:text; background-clip:text; text-align:center;
+filter:drop-shadow(0 6px 18px rgba(0,0,0,.18));
+}
+#hooray.show{animation:pop 1.2s ease-out forwards, hue 6s linear infinite}
+@keyframes pop{
+0%{transform:scale(.2) rotate(-6deg);opacity:0;letter-spacing:-.06em}
+45%{transform:scale(1.1) rotate(2deg);opacity:1;letter-spacing:.02em}
+100%{transform:scale(1) rotate(0deg);opacity:1}
+}
+@keyframes hue{from{filter:hue-rotate(0deg) drop-shadow(0 6px 18px rgba(0,0,0,.18))}
+to {filter:hue-rotate(360deg) drop-shadow(0 6px 18px rgba(0,0,0,.18))}}
+/* small helpers */
+.muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Tourism Mini-Quiz</h1>
+<p class="sub">Five quick questions across different areas of Tourism Studies. Select an answer and press <strong>Check</strong>.</p>
+
+<!-- Q1: Ecotourism -->
+<section class="q" data-answer="b">
+<div class="topic">Ecotourism</div>
+<h3>Which option best defines <em>ecotourism</em>?</h3>
+<div class="opts">
+<label><input type="radio" name="q1" value="a"> Visiting any national park for leisure, regardless of impact</label>
+<label><input type="radio" name="q1" value="b"> Travel to natural areas that <strong>conserves the environment</strong> and <strong>benefits local communities</strong></label>
+<label><input type="radio" name="q1" value="c"> Luxury travel with guided safaris and five-star lodging</label>
+<label><input type="radio" name="q1" value="d"> Mass tourism to tropical beaches</label>
+</div>
+<div class="bar">
+<button class="btn">Check</button>
+<span class="msg" aria-live="polite"></span>
+</div>
+</section>
+
+<!-- Q2: Sustainable Tourism -->
+<section class="q" data-answer="c">
+<div class="topic">Sustainable Tourism</div>
+<h3>Which practice best aligns with <em>sustainable tourism</em>?</h3>
+<div class="opts">
+<label><input type="radio" name="q2" value="a"> Unlimited short-term rentals with no local regulation</label>
+<label><input type="radio" name="q2" value="b"> Heavy reliance on single-use plastics for convenience</label>
+<label><input type="radio" name="q2" value="c"> Community-owned lodges with fair wages and waste reduction</label>
+<label><input type="radio" name="q2" value="d"> Overbooking flights to maximize seat yield</label>
+</div>
+<div class="bar">
+<button class="btn">Check</button>
+<span class="msg" aria-live="polite"></span>
+</div>
+</section>
+
+<!-- Q3: Cultural Heritage Tourism -->
+<section class="q" data-answer="a">
+<div class="topic">Cultural Heritage</div>
+<h3>Which is the best example of <em>cultural heritage tourism</em>?</h3>
+<div class="opts">
+<label><input type="radio" name="q3" value="a"> Visiting a UNESCO-listed fortress to learn about its history</label>
+<label><input type="radio" name="q3" value="b"> Shopping at a duty-free mall near a cruise port</label>
+<label><input type="radio" name="q3" value="c"> Riding a roller coaster at a theme park</label>
+<label><input type="radio" name="q3" value="d"> Renting a jet ski at a beach</label>
+</div>
+<div class="bar">
+<button class="btn">Check</button>
+<span class="msg" aria-live="polite"></span>
+</div>
+</section>
+
+<!-- Q4: Hospitality Operations -->
+<section class="q" data-answer="d">
+<div class="topic">Hospitality</div>
+<h3>In a hotel, which department primarily handles <em>reservations & guest check-in</em>?</h3>
+<div class="opts">
+<label><input type="radio" name="q4" value="a"> Housekeeping</label>
+<label><input type="radio" name="q4" value="b"> Food & Beverage</label>
+<label><input type="radio" name="q4" value="c"> Maintenance/Engineering</label>
+<label><input type="radio" name="q4" value="d"> Front Office / Front Desk</label>
+</div>
+<div class="bar">
+<button class="btn">Check</button>
+<span class="msg" aria-live="polite"></span>
+</div>
+</section>
+
+<!-- Q5: Aviation & Travel -->
+<section class="q" data-answer="b">
+<div class="topic">Aviation</div>
+<h3>For international leisure travel, which document is <em>generally required</em> to cross borders?</h3>
+<div class="opts">
+<label><input type="radio" name="q5" value="a"> Hotel booking confirmation</label>
+<label><input type="radio" name="q5" value="b"> Valid passport</label>
+<label><input type="radio" name="q5" value="c"> Boarding pass from a previous trip</label>
+<label><input type="radio" name="q5" value="d"> Driver’s licence</label>
+</div>
+<div class="bar">
+<button class="btn">Check</button>
+<span class="msg" aria-live="polite"></span>
+</div>
+</section>
+
+<p class="score muted">Score: <span id="score">0</span>/5</p>
+</div>
+
+<!-- Success overlay + fireworks canvas -->
+<div id="hooray">YAY! HOORAY! 🎉</div>
+<canvas id="confetti-canvas" style="position:fixed; inset:0; pointer-events:none;"></canvas>
+
+<!-- Tiny, fast fireworks/confetti library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+// Full-screen confetti setup
+const confettiCanvas = document.getElementById('confetti-canvas');
+const confettiBurst = confetti.create(confettiCanvas, { resize:true, useWorker:true });
+
+function fireworks() {
+confettiBurst({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
+setTimeout(() => confettiBurst({ particleCount: 90, spread: 100, origin: { y: 0.5 } }), 220);
+}
+
+const hooray = document.getElementById('hooray');
+const scoreEl = document.getElementById('score');
+let score = 0;
+
+// Attach handlers to each question card
+document.querySelectorAll('.q').forEach((card, index) => {
+const correct = card.dataset.answer; // e.g., "b"
+const btn = card.querySelector('.btn');
+const msg = card.querySelector('.msg');
+const name = `q${index+1}`;
+
+btn.addEventListener('click', () => {
+const picked = card.querySelector(`input[name="${name}"]:checked`);
+if (!picked) {
+msg.textContent = 'Choose an option to check.'; msg.className = 'msg muted';
+return;
+}
+if (picked.value === correct) {
+msg.textContent = 'YAY! HOORAY! ✅'; msg.className = 'msg ok';
+// only award once
+if (!card.dataset.done) { score++; scoreEl.textContent = score; card.dataset.done = '1'; }
+hooray.classList.add('show'); fireworks();
+setTimeout(() => hooray.classList.remove('show'), 1600);
+} else {
+msg.textContent = '☹️ Not quite — try again!'; msg.className = 'msg bad';
+}
+});
+});
+</script>
+</body>
+</html>
