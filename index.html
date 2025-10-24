@@ -8,8 +8,7 @@
 :root { --ok:#0a7c2f; --bad:#b00020; --ink:#1b1b1b; --muted:#6b7280; --card:#fff; }
 body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#f6f7fb;color:var(--ink);margin:0;padding:2rem}
 .wrap{max-width:860px;margin:auto}
-h1{margin:0 0 .25rem}
-.sub{color:var(--muted);margin:.25rem 0 1.25rem}
+h1{margin:0 0 .25rem} .sub{color:var(--muted);margin:.25rem 0 1.25rem}
 
 .q{background:var(--card);border:1px solid #e6e6ef;border-radius:14px;padding:1rem;margin:0 0 1rem 0}
 .topic{display:inline-block;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;background:#eef7ff;color:#0b5ad9;padding:.25rem .5rem;border-radius:6px;margin-bottom:.5rem}
@@ -21,6 +20,7 @@ h1{margin:0 0 .25rem}
 .btn{appearance:none;border:0;background:#0b5ad9;color:#fff;border-radius:10px;padding:.6rem .9rem;font-weight:600;cursor:pointer}
 .msg{min-height:1.4em;font-weight:700}
 .ok{color:var(--ok)} .bad{color:var(--bad)} .muted{color:var(--muted)}
+.feedback{margin:.35rem 0 0;font-size:.95rem;color:#374151}
 .score{color:var(--muted);font-weight:700;margin-top:.75rem}
 
 /* Big success text overlay */
@@ -38,35 +38,29 @@ color:transparent;background:linear-gradient(90deg,#ff0077,#ff9800,#ffd400,#00c8
 to{filter:hue-rotate(360deg) drop-shadow(0 6px 18px rgba(0,0,0,.18))}}
 
 /* Minimal confetti */
-.confetti{
-position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:hidden;
-}
-.piece{
-position:absolute;width:8px;height:14px;opacity:0;transform:translateY(-20px) rotate(0);
-animation:fall 900ms ease-out forwards;
-}
-@keyframes fall{
-0%{opacity:1}
-100%{transform:translateY(110vh) rotate(720deg);opacity:0}
-}
+.confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.piece{position:absolute;width:8px;height:14px;opacity:0;transform:translateY(-20px) rotate(0);
+animation:fall 900ms ease-out forwards}
+@keyframes fall{0%{opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <h1>Tourism Mini-Quiz</h1>
-<p class="sub">Select an answer and press <strong>Check</strong>. Five topics: Ecotourism, Sustainable Tourism, Cultural Heritage, Hospitality, Aviation.</p>
+<p class="sub">Pick an answer → <strong>Check</strong>. Wrong picks are cleared so you can try again. Five topics.</p>
 
 <!-- Q1: Ecotourism -->
 <section class="q" data-answer="b">
 <div class="topic">Ecotourism</div>
 <h3>Which option best defines <em>ecotourism</em>?</h3>
 <div class="opts">
-<label><input type="radio" value="a"> Visiting any park regardless of impact</label>
-<label><input type="radio" value="b"> Travel to natural areas that <strong>conserves the environment</strong> and <strong>benefits locals</strong></label>
-<label><input type="radio" value="c"> Luxury safaris only</label>
-<label><input type="radio" value="d"> Mass tourism to beaches</label>
+<label><input type="radio" value="a" data-fb="Ecotourism isn’t just visiting nature; it must minimise impact."> Visiting any park regardless of impact</label>
+<label><input type="radio" value="b" data-fb-ok="Correct: ecotourism conserves the environment and benefits local communities."> Travel to natural areas that <strong>conserves the environment</strong> and <strong>benefits locals</strong></label>
+<label><input type="radio" value="c" data-fb="Luxury alone doesn’t make a trip eco-friendly."> Luxury safaris only</label>
+<label><input type="radio" value="d" data-fb="Mass tourism often increases pressure on fragile sites."> Mass tourism to beaches</label>
 </div>
 <div class="bar"><button class="btn">Check</button><span class="msg"></span></div>
+<div class="feedback" aria-live="polite"></div>
 </section>
 
 <!-- Q2: Sustainable Tourism -->
@@ -74,12 +68,13 @@ animation:fall 900ms ease-out forwards;
 <div class="topic">Sustainable Tourism</div>
 <h3>Which practice best aligns with <em>sustainable tourism</em>?</h3>
 <div class="opts">
-<label><input type="radio" value="a"> No local regulation for short-term rentals</label>
-<label><input type="radio" value="b"> Heavy reliance on single-use plastics</label>
-<label><input type="radio" value="c"> Community-owned lodges, fair wages, waste reduction</label>
-<label><input type="radio" value="d"> Overbooking flights to maximize yield</label>
+<label><input type="radio" value="a" data-fb="Unmanaged rentals can raise prices and strain communities."> No local regulation for short-term rentals</label>
+<label><input type="radio" value="b" data-fb="Single-use plastics increase waste; sustainability reduces it."> Heavy reliance on single-use plastics</label>
+<label><input type="radio" value="c" data-fb-ok="Correct: fair wages + waste reduction + local ownership are sustainability pillars."> Community-owned lodges, fair wages, waste reduction</label>
+<label><input type="radio" value="d" data-fb="Overbooking is a revenue tactic, not a sustainability practice."> Overbooking flights to maximize yield</label>
 </div>
 <div class="bar"><button class="btn">Check</button><span class="msg"></span></div>
+<div class="feedback" aria-live="polite"></div>
 </section>
 
 <!-- Q3: Cultural Heritage Tourism -->
@@ -87,12 +82,13 @@ animation:fall 900ms ease-out forwards;
 <div class="topic">Cultural Heritage</div>
 <h3>Which is the best example of <em>cultural heritage tourism</em>?</h3>
 <div class="opts">
-<label><input type="radio" value="a"> Visiting a UNESCO-listed fortress to learn its history</label>
-<label><input type="radio" value="b"> Shopping at a duty-free mall</label>
-<label><input type="radio" value="c"> Riding a roller coaster</label>
-<label><input type="radio" value="d"> Renting a jet ski</label>
+<label><input type="radio" value="a" data-fb-ok="Correct: learning at UNESCO/heritage sites is core heritage tourism."> Visiting a UNESCO-listed fortress to learn its history</label>
+<label><input type="radio" value="b" data-fb="Shopping is retail tourism, not heritage."> Shopping at a duty-free mall</label>
+<label><input type="radio" value="c" data-fb="Theme parks are entertainment, not heritage."> Riding a roller coaster</label>
+<label><input type="radio" value="d" data-fb="Jet skis are beach recreation, not heritage."> Renting a jet ski</label>
 </div>
 <div class="bar"><button class="btn">Check</button><span class="msg"></span></div>
+<div class="feedback" aria-live="polite"></div>
 </section>
 
 <!-- Q4: Hospitality Operations -->
@@ -100,12 +96,13 @@ animation:fall 900ms ease-out forwards;
 <div class="topic">Hospitality</div>
 <h3>In a hotel, which department primarily handles reservations & check-in?</h3>
 <div class="opts">
-<label><input type="radio" value="a"> Housekeeping</label>
-<label><input type="radio" value="b"> Food & Beverage</label>
-<label><input type="radio" value="c"> Maintenance/Engineering</label>
-<label><input type="radio" value="d"> Front Office / Front Desk</label>
+<label><input type="radio" value="a" data-fb="Housekeeping handles rooms & cleanliness, not reservations."> Housekeeping</label>
+<label><input type="radio" value="b" data-fb="F&B manages restaurants and bars."> Food & Beverage</label>
+<label><input type="radio" value="c" data-fb="Engineering maintains facilities."> Maintenance/Engineering</label>
+<label><input type="radio" value="d" data-fb-ok="Correct: the Front Office (Front Desk) does reservations & arrivals."> Front Office / Front Desk</label>
 </div>
 <div class="bar"><button class="btn">Check</button><span class="msg"></span></div>
+<div class="feedback" aria-live="polite"></div>
 </section>
 
 <!-- Q5: Aviation -->
@@ -113,12 +110,13 @@ animation:fall 900ms ease-out forwards;
 <div class="topic">Aviation</div>
 <h3>For international leisure travel, which document is generally required?</h3>
 <div class="opts">
-<label><input type="radio" value="a"> Hotel booking confirmation</label>
-<label><input type="radio" value="b"> Valid passport</label>
-<label><input type="radio" value="c"> Old boarding pass</label>
-<label><input type="radio" value="d"> Driver’s licence</label>
+<label><input type="radio" value="a" data-fb="A hotel booking helps the trip, but isn’t a border document."> Hotel booking confirmation</label>
+<label><input type="radio" value="b" data-fb-ok="Correct: a valid passport is required to cross most borders."> Valid passport</label>
+<label><input type="radio" value="c" data-fb="Old boarding passes have no immigration use."> Old boarding pass</label>
+<label><input type="radio" value="d" data-fb="Driver’s licences are domestic ID, not international travel docs."> Driver’s licence</label>
 </div>
 <div class="bar"><button class="btn">Check</button><span class="msg"></span></div>
+<div class="feedback" aria-live="polite"></div>
 </section>
 
 <p class="score">Score: <span id="score">0</span>/5</p>
@@ -136,36 +134,44 @@ let score = 0;
 
 function confettiBurst() {
 const colors = ['#ff004c','#ff9800','#ffd400','#00c853','#00bcd4','#7c4dff'];
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 90; i++) {
 const p = document.createElement('div');
 p.className = 'piece';
 p.style.left = Math.random()*100 + 'vw';
 p.style.top = '-2vh';
-p.style.background = colors[Math.floor(Math.random()*colors.length)];
+p.style.background = colors[(Math.random()*colors.length)|0];
 p.style.transform = `translateY(-20px) rotate(${Math.random()*90}deg)`;
-p.style.animationDuration = (700 + Math.random()*800) + 'ms';
+p.style.animationDuration = (700 + Math.random()*900) + 'ms';
 confettiBox.appendChild(p);
-setTimeout(() => p.remove(), 1100);
+setTimeout(() => p.remove(), 1200);
 }
 }
 
-// Attach one handler per question card
+// One handler per question
 document.querySelectorAll('.q').forEach((card) => {
-const correct = card.dataset.answer; // e.g., "b"
+const correct = card.dataset.answer;
 const btn = card.querySelector('.btn');
 const msg = card.querySelector('.msg');
+const fb = card.querySelector('.feedback');
 
 btn.addEventListener('click', () => {
 const picked = card.querySelector('input[type="radio"]:checked');
-if (!picked) { msg.textContent = 'Choose an option.'; msg.className='msg muted'; return; }
+if (!picked) { msg.textContent = 'Choose an option.'; msg.className='msg muted'; fb.textContent=''; return; }
 
-if (picked.value === correct) {
+const value = picked.value;
+const ok = value === correct;
+
+if (ok) {
 msg.textContent = 'YAY! HOORAY! ✅'; msg.className = 'msg ok';
+fb.textContent = picked.dataset.fbOk || 'Great job!';
 if (!card.dataset.done) { score++; scoreEl.textContent = score; card.dataset.done = '1'; }
 hooray.classList.add('show'); confettiBurst();
 setTimeout(() => hooray.classList.remove('show'), 1400);
 } else {
 msg.textContent = '☹️ Not quite — try again!'; msg.className = 'msg bad';
+fb.textContent = picked.dataset.fb || 'Review the concept and try again.';
+// CLEAR the wrong selection so they can try again immediately
+picked.checked = false;
 }
 });
 });
